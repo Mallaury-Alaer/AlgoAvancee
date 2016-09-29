@@ -17,9 +17,12 @@ public class ExoSet {
 			ens2.add(r.nextInt(10));
 		}
 		
+		
 		afficher(ens1);
 		afficher(ens2);
 		afficher(inter(ens1,ens2));
+		afficher(union(ens1, ens2));
+		System.out.print(isIn(ens1,ens2));
 	}
 		
 	public static void afficher(Set<Integer> ens){
@@ -36,23 +39,49 @@ public class ExoSet {
 	
 	public static Set<Integer> inter(Set<Integer> set1, Set<Integer> set2){
 		Iterator<Integer> it1 = set1.iterator();
-		Iterator<Integer> it2 = set2.iterator();
 		Set<Integer> res = new HashSet<Integer>();
-		int x;
-		int y;
-		
+		int n;
 		while(it1.hasNext()){
-			x=it1.next();
-			while(it2.hasNext()){
-				y=it2.next();
-				if(x == y ){
-					res.add(x);
-				}
+			n=it1.next();
+			if(set2.contains(n)){
+				res.add(n);
 			}
 		}
 		return res;
 		
 	}
+	
+	public static Set<Integer> union(Set<Integer> set1, Set<Integer> set2){
+		Set<Integer> res = new HashSet<Integer>();
+		Iterator<Integer> it1 = set1.iterator();
+		Iterator<Integer> it2 = set2.iterator();
+		
+		while(it1.hasNext() || it2.hasNext()){
+			if(it1.hasNext()){
+				res.add(it1.next());
+			}
+			if(it2.hasNext()){
+				res.add(it2.next());
+			}
+		}
+		return res;
+		
+	}
+	
+	public static boolean isIn(Set<Integer> set1, Set<Integer> set2){
+		Iterator<Integer> it = set1.iterator();
+		boolean res = false;
+		while(it.hasNext()){
+			if(set2.contains(it.next())){
+				res=true;
+			}else{
+				return false;
+			}
+		}
+		
+		return res;
+	}
+
 	
 	
 		
